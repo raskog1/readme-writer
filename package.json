@@ -1,0 +1,22 @@
+{
+  "name": "readme-writer",
+  "version": "1.0.0",
+  "description": "A CLI app that assists the user in creating a quality README for their projects.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raskog1/readme-writer.git"
+  },
+  "author": "Ryan Skog",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raskog1/readme-writer/issues"
+  },
+  "homepage": "https://github.com/raskog1/readme-writer#readme",
+  "dependencies": {
+    "inquirer": "^7.1.0"
+  }
+}
