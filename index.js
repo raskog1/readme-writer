@@ -1,5 +1,6 @@
-let inquirer = require("inquirer");
-let fs = require("fs");
+const inquirer = require("inquirer");
+const fs = require("fs");
+const generateMarkdown = require("./generateMarkdown");
 
 inquirer.prompt([
     {
@@ -7,7 +8,7 @@ inquirer.prompt([
         message: "What is the title of your project?",
         name: "projectname",
         validate: function validateProject(name) {
-            return name !=="";
+            return name !== "";
         }
     },
     {
@@ -31,7 +32,7 @@ inquirer.prompt([
         type: "input",
         message: "Explain the installation process.",
         name: "installationDetails",
-        when: function( data ) {
+        when: function (data) {
             return data.installationReq === true;
         }
     },
@@ -49,7 +50,7 @@ inquirer.prompt([
         type: "input",
         message: "What website provides assistance?",
         name: "helpWebsite",
-        when: function( data ) {
+        when: function (data) {
             return data.helpOptions === "Website";
         }
     },
@@ -57,15 +58,15 @@ inquirer.prompt([
         type: "input",
         message: "What email provides assistance?",
         name: "helpEmail",
-        when: function( data ) {
+        when: function (data) {
             return data.helpOptions === "Email";
         }
     },
     {
-        type: "input",
+        type: "number",
         message: "What phone number provides assistance?",
         name: "helpPhone",
-        when: function( data ) {
+        when: function (data) {
             return data.helpOptions === "Phone";
         }
     },
@@ -84,7 +85,7 @@ inquirer.prompt([
         type: "input",
         message: "How is it licensed?",
         name: "licenseDetails",
-        when: function( data ) {
+        when: function (data) {
             return data.licenseStatus === true;
         }
     },
@@ -98,7 +99,7 @@ inquirer.prompt([
         type: "input",
         message: "What are the requirements for contributions?",
         name: "contributionDetails",
-        when: function( data ) {
+        when: function (data) {
             return data.contributionStatus === true;
         }
     },
@@ -117,21 +118,28 @@ inquirer.prompt([
         type: "input",
         message: "Provide message regarding termination of support.",
         name: "supportDetails",
-        when: function( data ) {
+        when: function (data) {
             return data.supportStatus === false;
         }
     }
 
-]).then(function(data) {
+]).then(function (data) {
     const filename = data.projectname.toLowerCase().split(' ').join('') + ".json";
     writeToFile(filename, data);
+
+    const markdown = generateMarkdown(data);
+    fs.writeFile("markdown.md", markdown, function (err) {
+        if (err) {
+            return console.log(err);
+        }
+    })
 })
 
 const questions = [
 ];
 
 function writeToFile(fileName, data) {
-    fs.appendFile(fileName, JSON.stringify(data, null, '\t'), function(err){ 
+    fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function (err) {
         if (err) {
             return console.log(err);
         }

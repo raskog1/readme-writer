@@ -1,55 +1,15 @@
 {
 	"projectname": "cool project",
-	"description": "soooo close now",
-	"installationReq": true
-}{
-	"projectname": "cool project",
-	"description": "one more time baby",
-	"installationReq": true
-}{
-	"projectname": "cool project",
-	"description": "please god, why don't you loveme?",
-	"installationReq": true,
-	"installationDetails": "well it's like this and like that and like this and uh"
-}{
-	"projectname": "cool project",
-	"description": "omg it's gonna work",
-	"installationReq": false
-}{
-	"projectname": "cool project",
-	"description": "it's finally working!!!!",
-	"installationReq": false
-}{
-	"projectname": "cool project",
-	"description": "we're progressing to the left!",
-	"installationReq": false
-}{
-	"projectname": "cool project",
-	"description": "wooooohooooo",
+	"description": "",
+	"tableStatus": false,
 	"installationReq": false,
 	"helpOptions": [
-		"Email",
-		"Phone"
-	]
-}{
-	"projectname": "cool project",
-	"description": "it's coming along now, and for that, I am greatful",
-	"installationReq": false,
-	"helpOptions": [
-		"Phone"
+		"Website"
 	],
-	"roadmap": "beer goggles",
-	"licenseStatus": true,
-	"licenseDetails": "through the us government"
-}{
-	"projectname": "cool project",
-	"description": "super cool, super easy",
-	"tableStatus": true,
-	"installationReq": true,
-	"installationDetails": "plug it in yo",
-	"helpOptions": [],
-	"roadmap": "bionic arms",
+	"roadmap": "",
 	"licenseStatus": false,
-	"contributionStatus": true,
-	"contributionDetails": "email me and pay me money"
+	"contributionStatus": false,
+	"authors": "",
+	"supportStatus": false,
+	"supportDetails": ""
 }

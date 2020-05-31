@@ -1,0 +1,17 @@
+{
+	"projectname": "New Project",
+	"description": "It's a groovy take on an oldie but a goodie.",
+	"tableStatus": true,
+	"installationReq": true,
+	"installationDetails": "Go download the npm.",
+	"helpOptions": [
+		"Phone"
+	],
+	"roadmap": "Lots and lots of useless utilities.",
+	"licenseStatus": true,
+	"licenseDetails": "Through the U.S.A. government.",
+	"contributionStatus": true,
+	"contributionDetails": "Email me, tell me how cool I am.",
+	"authors": "Finley Daly",
+	"supportStatus": true
+}
