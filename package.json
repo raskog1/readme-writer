@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/raskog1/readme-writer#readme",
   "dependencies": {
-    "inquirer": "^7.1.0"
+    "inquirer": "^7.1.0",
+    "joi": "^14.3.1"
   }
 }

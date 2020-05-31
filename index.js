@@ -1,142 +1,99 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMarkdown = require("./generateMarkdown");
+const joi = require("joi");
 
-inquirer.prompt([
-    {
-        type: "input",
-        message: "What is the title of your project?",
-        name: "projectname",
-        validate: function validateProject(name) {
-            return name !== "";
-        }
-    },
-    {
-        type: "input",
-        message: "Provide a description of your project.",
-        name: "description"
-    },
-    {
-        type: "confirm",
-        message: "Do you want to include a table of contents?",
-        name: "tableStatus",
-        default: false
-    },
-    {
-        type: "confirm",
-        message: "Does your project require installation?",
-        name: "installationReq",
-        default: false
-    },
-    {
-        type: "input",
-        message: "Explain the installation process.",
-        name: "installationDetails",
-        when: function (data) {
-            return data.installationReq === true;
-        }
-    },
-    {
-        type: "checkbox",
-        message: "What is the best option for people to go to for help?",
-        name: "helpOptions",
-        choices: [
-            "Website",
-            "Email",
-            "Phone"
-        ]
-    },
-    {
-        type: "input",
-        message: "What website provides assistance?",
-        name: "helpWebsite",
-        when: function (data) {
-            return data.helpOptions === "Website";
-        }
-    },
-    {
-        type: "input",
-        message: "What email provides assistance?",
-        name: "helpEmail",
-        when: function (data) {
-            return data.helpOptions === "Email";
-        }
-    },
-    {
-        type: "number",
-        message: "What phone number provides assistance?",
-        name: "helpPhone",
-        when: function (data) {
-            return data.helpOptions === "Phone";
-        }
-    },
-    {
-        type: "input",
-        message: "What is planned for future releases?",
-        name: "roadmap"
-    },
-    {
-        type: "confirm",
-        message: "Is this project licenced?",
-        name: "licenseStatus",
-        default: false
-    },
-    {
-        type: "input",
-        message: "How is it licensed?",
-        name: "licenseDetails",
-        when: function (data) {
-            return data.licenseStatus === true;
-        }
-    },
-    {
-        type: "confirm",
-        message: "Is this project open to contributions?",
-        name: "contributionStatus",
-        default: false
-    },
-    {
-        type: "input",
-        message: "What are the requirements for contributions?",
-        name: "contributionDetails",
-        when: function (data) {
-            return data.contributionStatus === true;
-        }
-    },
-    {
-        type: "input",
-        message: "Provide any authors and acknowledgements.",
-        name: "authors"
-    },
-    {
-        type: "confirm",
-        message: "Will this project continue to be supported?",
-        name: "supportStatus",
-        default: true
-    },
-    {
-        type: "input",
-        message: "Provide message regarding termination of support.",
-        name: "supportDetails",
-        when: function (data) {
-            return data.supportStatus === false;
-        }
-    }
+function init() {
+    console.log("Welcome to the quick and basic README generator. You will be asked a series of questions to quickly generate a README file for your project.  Please be as descriptive as possible with your answers.  The README.md file will be an editable file that should be updated along with the project");
 
-]).then(function (data) {
-    const filename = data.projectname.toLowerCase().split(' ').join('') + ".json";
-    writeToFile(filename, data);
-
-    const markdown = generateMarkdown(data);
-    fs.writeFile("markdown.md", markdown, function (err) {
-        if (err) {
-            return console.log(err);
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the title of your project?",
+            name: "projectname",
+            validate: function validateInput(name) {
+                return name !== "";
+            }
+        },
+        {
+            type: "input",
+            message: "Provide a description of your project.",
+            name: "description",
+            validate: function validateInput(name) {
+                return name !== "";
+            }
+        },
+        {
+            type: "input",
+            message: "What are the steps required to install your project?",
+            name: "installationDetails"
+        },
+        {
+            type: "checkbox",
+            message: "What tools were used in the development of your project?",
+            name: "tools",
+            choices: [
+                " HTML", " CSS", " Bootstrap 4", " JavaScript", " jQuery", " API's", " AJAX", " JSON", " Node.js"
+            ]
+        },
+        {
+            type: "input",
+            message: "What is planned for future releases?",
+            name: "roadmap"
+        },
+        {
+            type: "input",
+            message: "Explain how to use the program.",
+            name: "usage",
+        },
+        {
+            type: "input",
+            message: "How is it licensed?",
+            name: "licenseDetails"
+        },
+        {
+            type: "input",
+            message: "What are the guidelines for contributions?",
+            name: "contributionDetails"
+        },
+        {
+            type: "input",
+            message: "Please credit any authors and contributors.",
+            name: "authors"
+        },
+        {
+            type: "input",
+            message: "Please provide any testing associated with this project.",
+            name: "tests"
+        },
+        {
+            type: "input",
+            message: "Who can the user contact with questions?  Provide email address only.",
+            name: "questions",
+            validate: function validateEmail(name) {
+                let valid;
+                joi.validate(name, joi.string().email(), function (err, val) {
+                    if (err) {
+                        valid = console.log("Please enter a valid email address.");
+                    } else {
+                        valid = true;
+                    }
+                })
+                return valid;
+            }
         }
+    ]).then(function (data) {
+        const filename = data.projectname.toLowerCase().split(' ').join('') + ".json";
+        writeToFile(filename, data);
+
+        const markdown = generateMarkdown(data);
+        fs.writeFile("README.md", markdown, function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        })
     })
-})
-
-const questions = [
-];
+}
 
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function (err) {
@@ -146,8 +103,4 @@ function writeToFile(fileName, data) {
     })
 }
 
-function init() {
-
-}
-
-//init();
+init();
