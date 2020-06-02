@@ -1,0 +1,19 @@
+{
+	"projectname": "readme-writer",
+	"description": "This is a CLI readme writer app that will quickly write a readme file.",
+	"installationDetails": "From the terminal, type node index.",
+	"tools": [
+		" JavaScript",
+		" jQuery",
+		" API's",
+		" JSON",
+		" Node.js"
+	],
+	"roadmap": "Probably nothing as I'm 100% over this project.",
+	"usage": "Just follow the prompts and answer the questions as best as you can.",
+	"licenseDetails": "It's not currently licensed.",
+	"contributionDetails": "Feel free to email me if you want to take over the project.",
+	"authors": "Myself, and Alex helped a little.",
+	"tests": "No tests at this time.",
+	"questions": "ryan.skog@outlook.com"
+}
